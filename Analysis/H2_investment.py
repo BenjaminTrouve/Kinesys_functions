@@ -97,6 +97,8 @@ def func_cost_inv(file_path_scen,file_path_ref, run_name_scen,run_name_ref, outp
             plt.savefig(output_folder + 'H2investment_costs.pdf'
                     , format ='pdf'
                     ,  bbox_inches='tight')
+            return fig
     # # plt.show()
-    plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
+    f = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
+    return f
 
