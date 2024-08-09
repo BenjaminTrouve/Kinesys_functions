@@ -42,41 +42,29 @@ for key in input_fields.keys():
         st.session_state.inputs[key] = ""
 
 
-# # Function to load input from the storage file
-# def load_input(storage_file):
-#     if os.path.exists(storage_file):
-#         with open(storage_file, 'r') as f:
-#             return json.load(f).get('folder_path', '')
-#     return ''
+# def convert_notebook_to_script(notebook_path, script_path):
+#     """Convert Jupyter notebook to Python script."""
+#     with open(notebook_path, 'r', encoding='utf-8') as f:
+#         notebook_content = nbformat.read(f, as_version=4)
+#     exporter = PythonExporter()
+#     script, _ = exporter.from_notebook_node(notebook_content)
+#     with open(script_path, 'w', encoding='utf-8') as f:
+#         f.write(script)
 
-# # Function to save input to the storage file
-# def save_input(folder_path,storage_file):
-#     with open(storage_file, 'w') as f:
-#         json.dump({'folder_path': folder_path}, f)
+# def import_functions_from_script(script_path):
+#     """Import functions starting with 'func_' from a Python script."""
+#     module_name = os.path.splitext(os.path.basename(script_path))[0]
+#     spec = importlib.util.spec_from_file_location(module_name, script_path)
+#     module = importlib.util.module_from_spec(spec)
+#     spec.loader.exec_module(module)
 
-def convert_notebook_to_script(notebook_path, script_path):
-    """Convert Jupyter notebook to Python script."""
-    with open(notebook_path, 'r', encoding='utf-8') as f:
-        notebook_content = nbformat.read(f, as_version=4)
-    exporter = PythonExporter()
-    script, _ = exporter.from_notebook_node(notebook_content)
-    with open(script_path, 'w', encoding='utf-8') as f:
-        f.write(script)
-
-def import_functions_from_script(script_path):
-    """Import functions starting with 'func_' from a Python script."""
-    module_name = os.path.splitext(os.path.basename(script_path))[0]
-    spec = importlib.util.spec_from_file_location(module_name, script_path)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-
-    functions = {}
-    for name in dir(module):
-        if name.startswith("func_"):
-            func = getattr(module, name)
-            if callable(func):
-                functions[name] = func
-    return functions
+#     functions = {}
+#     for name in dir(module):
+#         if name.startswith("func_"):
+#             func = getattr(module, name)
+#             if callable(func):
+#                 functions[name] = func
+#     return functions
 
 def inverse_process_string_list(input_list):
         processed_list = []
@@ -85,6 +73,64 @@ def inverse_process_string_list(input_list):
             reconstructed_string = 'func_' + '_'.join(input_string.split())
             processed_list.append(reconstructed_string)
         return processed_list
+
+def get_python_files_from_github_folder(folder_url):
+    """Retrieve and execute .py files from a GitHub folder."""
+    # Extract the API URL to list contents of the folder
+    folder_api_url = folder_url.replace('https://github.com/', 'https://api.github.com/repos/')
+    folder_api_url = folder_api_url.replace('tree/main/', 'contents/')
+
+    # Get the list of files in the folder
+    response = requests.get(folder_api_url)
+    
+    if response.status_code != 200:
+        raise Exception(f"Failed to retrieve folder contents: {response.status_code}")
+
+    contents = response.json()
+    
+    # Filter out .py files
+    py_files = [item for item in contents if item['name'].endswith('.py') and item['type'] == 'file']
+
+    if not py_files:
+        raise Exception("No Python (.py) files found in the folder.")
+    
+    # Process each .py file
+    all_functions = {}
+    for file_info in py_files:
+        file_url = file_info['download_url']
+        # print(file_url)  # Direct URL to the raw file content
+        # print(f"Processing file: {file_info['name']}")
+        f = import_functions_from_github(file_url)
+        all_functions.update(f)
+    return all_functions
+
+def import_functions_from_github(file_url):
+    """Import functions starting with 'func_' from a Python script on GitHub."""
+    # Fetch the script content from GitHub
+    response = requests.get(file_url)
+    
+    if response.status_code != 200:
+        raise Exception(f"Failed to download script: {response.status_code}")
+    
+    script_content = response.text
+
+    # Create a temporary module
+    module_name = os.path.splitext(os.path.basename(file_url))[0]
+    spec = importlib.util.spec_from_loader(module_name, loader=None)
+    module = importlib.util.module_from_spec(spec)
+    
+    # Execute the script content within this module
+    exec(script_content, module.__dict__)
+    
+    # Import and return all functions starting with 'func_'
+    functions = {name: obj for name, obj in module.__dict__.items() if callable(obj) and name.startswith('func_')}
+    # print(functions)
+    return functions
+
+####################################
+################################
+############################
+
 
 st.set_page_config(page_title='KINESYS dashboard', page_icon=':bar_chart:',layout='wide')
 # st.set_option('server.maxUploadSize', 400)
@@ -98,7 +144,7 @@ tab1, tab2 = st.tabs(["**VD to CSV**", "**Figures display**"])
 
 # st.markdown('<style>div.block-container{padding-top:1rem;}<style>',unsafe_allow_html=True)
 
-folder_path_csv = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\VD to csv'
+# folder_path_csv = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\VD to csv'
 with tab1:
     col1, col2, col3 = st.columns([3, 1, 3], vertical_alignment='center')
     
@@ -140,18 +186,21 @@ with tab1:
         file_path = directory + '/' + filename
         # st.write(file_path)
 
-        ipynb_files = glob.glob(os.path.join(folder_path_csv, '*.ipynb'))
-        ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
+        folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
+        function_to_csv  = get_python_files_from_github_folder(folder_url_csv)
+        # ipynb_files = glob.glob(os.path.join(folder_path_csv, '*.ipynb'))
+        # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
 
-        all_functions = {}
-        for filename_csv in ipynb_file_names:
-            notebook_path = os.path.join(folder_path_csv, filename_csv)
-            script_path = os.path.join(folder_path_csv, filename_csv.replace(".ipynb", ".py"))
-            convert_notebook_to_script(notebook_path, script_path)
-            function_vd_csv = import_functions_from_script(script_path)
-            str_keys = [str(key) for key in function_vd_csv.keys()]
-            function_to_call =  function_vd_csv[str_keys[0]]
-            function_to_call(file_path,output_data_in)
+        # all_functions = {}
+        # for filename_csv in ipynb_file_names:
+        #     # notebook_path = os.path.join(folder_path_csv, filename_csv)
+        #     # script_path = os.path.join(folder_path_csv, filename_csv.replace(".ipynb", ".py"))
+        #     # convert_notebook_to_script(notebook_path, script_path)
+        #     # function_vd_csv = import_functions_from_script(script_path)
+
+        str_keys = [str(key) for key in function_to_csv.keys()]
+        function_to_call =  function_to_csv[str_keys[0]]
+        function_to_call(file_path,output_data_in)
 
         st.write('Converted !!!')
 
@@ -196,7 +245,7 @@ with tab2:
         #     save_input(output_path,storage_output)
         st.session_state.inputs['figure_path'] = st.text_input(":open_file_folder: Enter figure output folder"
                                                                , st.session_state.inputs['figure_path'])
-        output_path = st.session_state.inputs['folder_path']
+        output_path = st.session_state.inputs['figure_path']
         # output_path = st.text_input(":open_file_folder: Enter figure output folder")
 
 
@@ -218,6 +267,7 @@ with tab2:
         date_scen_ddmm = date_scen.strftime('%d%m')
 
     st.markdown('**STEP 3: Choose figure to display!**')
+
     def scenario_param(date_ref, date_scen,input_path,output_path):
         date_list = [date_ref, date_scen]
         run_name_ref = f'nze~0004_{date_list[0]}'
@@ -238,21 +288,28 @@ with tab2:
 
 
     # folder_path = r'C:\Users\trouvebe\Desktop\Thesis\Chapter 1\Python functions\Kinesys post-processing\Analysis'
-    folder_path = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\Functions'
-    
-
+    # folder_path = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\Functions'
+    # url = 'https://api.github.com/repos/BenjaminTrouve/Kinesys_functions/contents/Analysis'
+    # # Send the request
+    # response = requests.get(url)
+    # if response.status_code == 200:
+    #     folder_path = response.json()
+    # py_files = [item for item in contents if item['name'].endswith('.py') and item['type'] == 'file']
 
     # Process all .ipynb files in the folder
-    ipynb_files = glob.glob(os.path.join(folder_path, '*.ipynb'))
-    ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
+    # ipynb_files = glob.glob(os.path.join(folder_path, '*.ipynb'))
+    # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
 
-    all_functions = {}
-    for filename in ipynb_file_names:
-        notebook_path = os.path.join(folder_path, filename)
-        script_path = os.path.join(folder_path, filename.replace(".ipynb", ".py"))
-        convert_notebook_to_script(notebook_path, script_path)
-        functions = import_functions_from_script(script_path)
-        all_functions.update(functions)
+    # all_functions = {}
+    # for filename in ipynb_file_names:
+    #     notebook_path = os.path.join(folder_path, filename)
+    #     script_path = os.path.join(folder_path, filename.replace(".ipynb", ".py"))
+    #     convert_notebook_to_script(notebook_path, script_path)
+    #     functions = import_functions_from_script(script_path)
+    #     all_functions.update(functions)
+
+    folder_url = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/Analysis'
+    all_functions  = get_python_files_from_github_folder(folder_url)
 
     def process_string_list(input_list):
         processed_list = []
