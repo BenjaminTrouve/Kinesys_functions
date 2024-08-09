@@ -12,8 +12,7 @@ from matplotlib.colors import ListedColormap
 
 
 def func_H2_new_cap_process(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder, called = False):
-    # cap_new = pd.read_csv(file_path_ref + 'Cap_New_' + run_name_ref + '.csv', sep = ',')
-    cap_new = pd.read_feather(file_path_ref + 'Cap_New_' + run_name_ref + '.feather')
+    cap_new = pd.read_csv(file_path_ref + 'Cap_New_' + run_name_ref + '.csv', sep = ',')
     new_cap_ref = cap_new[(cap_new['7'].str.contains('INSTCAP')) & (cap_new['2'].str.contains('H2prd'))]
     new_cap_ref['group'] = new_cap_ref['3'].astype(str).str.cat(new_cap_ref['2'].astype(str), sep='_')
     new_cap_ref = new_cap_ref.sort_values(by='3', ascending=True)
@@ -21,8 +20,7 @@ def func_H2_new_cap_process(file_path_scen,file_path_ref, run_name_scen,run_name
     new_cap_ref = new_cap_ref[~new_cap_ref['group'].duplicated()]
     new_cap_ref['new_capacity'] = new_cap_ref.groupby('2')['sum'].transform('cumsum')
     
-    # cap_new = pd.read_csv(file_path_scen + 'Cap_New_' + run_name_scen + '.csv', sep = ',')
-    new_cap_scen = pd.read_feather(file_path_scen + 'Cap_New_' + run_name_scen + '.feather')
+    new_cap_scen = pd.read_csv(file_path_scen + 'Cap_New_' + run_name_scen + '.csv', sep = ',')
     new_cap_scen = cap_new[(cap_new['7'].str.contains('INSTCAP')) & (cap_new['2'].str.contains('H2prd'))]
     new_cap_scen['group'] = new_cap_scen['3'].astype(str).str.cat(new_cap_scen['2'].astype(str), sep='_')
     new_cap_scen = new_cap_scen.sort_values(by='3', ascending=True)
