@@ -101,7 +101,7 @@ def func_H2_cons_sector(file_path_scen,file_path_ref, run_name_scen,run_name_ref
         plt.savefig(output_folder + 'H2consumption_by_sector.pdf'
                 , format ='pdf'
                 ,  bbox_inches='tight')
-
+        return fig
     # Call the function to plot
     plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
 
