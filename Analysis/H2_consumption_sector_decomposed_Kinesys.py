@@ -132,6 +132,7 @@ def func_H2_cons_sector_decompose(file_path_scen,file_path_ref, run_name_scen,ru
             plt.savefig(new_folder + f'consumption_{cons}.pdf'
                     , format ='pdf'
                     ,  bbox_inches='tight')
+            return fig
         
     # return figure_list
         fig = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
