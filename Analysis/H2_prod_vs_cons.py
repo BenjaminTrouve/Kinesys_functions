@@ -102,6 +102,6 @@ def func_H2_prod_vs_cons_by_region(file_path_scen, run_name_scen, output_folder)
         plt.savefig(output_folder + 'H2production_vs_consumption_by_region.pdf'
                 , format ='pdf'
                 ,  bbox_inches='tight')
-        
-    plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
-
+        return fig
+    f = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
+    return f
