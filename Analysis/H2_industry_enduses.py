@@ -129,6 +129,6 @@ def func_H2_industry_enduses(file_path_scen,file_path_ref, run_name_scen,run_nam
             plt.savefig(new_folder + f'consumption_{process}.pdf'
                     , format ='pdf'
                     ,  bbox_inches='tight')
-
+            return fig
         plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
 
