@@ -105,10 +105,9 @@ def func_H2_new_cap_process(file_path_scen,file_path_ref, run_name_scen,run_name
         ax.add_artist(second_legend)
         ax.grid(True)
         ax.set_axisbelow(True)
-        return plt
-        # plt.savefig(output_folder + 'H2new_capcity_by_process.pdf'
-        #         , format ='pdf'
-        #         ,  bbox_inches='tight')
+        plt.savefig(output_folder + 'H2new_capcity_by_process.pdf'
+                , format ='pdf'
+                ,  bbox_inches='tight')
         return fig
     f = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
     return f
