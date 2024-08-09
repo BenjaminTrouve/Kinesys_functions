@@ -139,5 +139,5 @@ def func_H2_trade(file_path_scen,file_path_ref, run_name_scen,run_name_ref,outpu
     plt.savefig(output_folder + 'H2net_export_map.pdf'
             , format ='pdf',
             bbox_inches='tight')
-    return plt
+    return fig
 
