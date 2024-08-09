@@ -116,6 +116,6 @@ def func_H2_prod_process(file_path_scen,file_path_ref, run_name_scen,run_name_re
         plt.savefig(output_folder + 'H2production_by_process.pdf'
                 , format ='pdf'
                 ,  bbox_inches='tight')
-        
-    plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
-
+        return fig
+    f = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
+    return f
