@@ -108,6 +108,7 @@ def func_H2_consumption_by_region(file_path_scen,file_path_ref, run_name_scen,ru
                 , format ='pdf'
                 ,  bbox_inches='tight')
         return fig
-    plot_stacked_bars_with_differentiation(sorted_df2, sorted_df1)
+    f = plot_stacked_bars_with_differentiation(sorted_df2, sorted_df1)
+    return f
     
 
