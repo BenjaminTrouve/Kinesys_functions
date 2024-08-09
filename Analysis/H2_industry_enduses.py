@@ -21,7 +21,8 @@ def func_H2_industry_enduses(file_path_scen,file_path_ref, run_name_scen,run_nam
     H2_cons_ref = pd.merge(H2_cons_ref,label_match,how='inner',left_on='2',right_on='process')
     H2_cons_ref = H2_cons_ref.drop_duplicates()
     H2_cons_ref['name'] = H2_cons_ref['name'].apply(lambda x: ''.join(x.split('-')[:2]) if x.count('-')==3 else ''.join(x.split('-')[0]))
-    
+
+    figure_list = []
     for process in H2_cons_ref['name'].unique():
         new_folder =  work_folder + process + '/'
         os.makedirs(new_folder, exist_ok=True)
@@ -130,5 +131,6 @@ def func_H2_industry_enduses(file_path_scen,file_path_ref, run_name_scen,run_nam
                     , format ='pdf'
                     ,  bbox_inches='tight')
             return fig
-        plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
-
+        f = plot_stacked_bars_with_differentiation(sorted_df1, sorted_df2)
+        figure_list.append(f)
+        return figure_list
