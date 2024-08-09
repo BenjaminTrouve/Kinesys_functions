@@ -1,0 +1,12 @@
+streamlit
+pandas
+os
+warnings 
+glob
+nbconvert
+nbformat
+glob
+importlib
+matplotlib
+requests
+json
