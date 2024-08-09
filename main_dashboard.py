@@ -273,10 +273,8 @@ with tab2:
         run_name_ref = f'nze~0004_{date_list[0]}'
         run_name_scen = f'nze~0004_{date_list[1]}'
         folder_path = input_path.replace('\\','/')
-        # file_path_ref = os.path.join(folder_path,run_name_ref) 
-        file_path_ref = folder_path + '/' + run_name_ref + '/'
-        # file_path_scen = os.path.join(folder_path,run_name_scen)
-        file_path_scen = folder_path + '/' + run_name_scen + '/'
+        file_path_ref = os.path.join(folder_path,run_name_ref) 
+        file_path_scen = os.path.join(folder_path,run_name_scen)
         
         output_path1 = output_path.replace('\\','/')
         output_folder = os.path.join(output_path1,run_name_scen) + '/'
