@@ -11,7 +11,7 @@ from matplotlib.patches import Patch
 from matplotlib.colors import ListedColormap
 
 
-def func_H2_new_cap_process(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder, called = False):
+def func_H2_new_capacity_by_process(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder, called = False):
     cap_new = pd.read_csv(file_path_ref + 'Cap_New_' + run_name_ref + '.csv', sep = ',')
     new_cap_ref = cap_new[(cap_new['7'].str.contains('INSTCAP')) & (cap_new['2'].str.contains('H2prd'))]
     new_cap_ref['group'] = new_cap_ref['3'].astype(str).str.cat(new_cap_ref['2'].astype(str), sep='_')
