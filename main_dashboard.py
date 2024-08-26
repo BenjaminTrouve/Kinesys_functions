@@ -148,13 +148,13 @@ tab1, tab2 = st.tabs(["**VD to CSV**", "**Figures display**"])
 with tab1:
     col1, col2, col3 = st.columns([3, 1, 3], vertical_alignment='center')
     
-    fl = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
+    fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
+    fl_vde = st.file_uploader(":page_facing_up: Choose VD file:", type=['vde'])
     with col1:
         st.session_state.inputs['vd_file_path'] = st.text_input(':open_file_folder: Enter the WorkTIMES directory'
                                                                , st.session_state.inputs['vd_file_path'])
         directory = st.session_state.inputs['vd_file_path']
 
-        # directory = st.text_input(':open_file_folder: Enter the WorkTIMES directory')
     with col2:
         st.markdown(
             """
@@ -179,8 +179,8 @@ with tab1:
         output_data_in = st.session_state.inputs['folder_path']
         # output_data_in = st.text_input(':open_file_folder: Enter the folder for CSV files')        
 
-    if fl and directory and output_data_in:
-        filename = fl.name
+    if fl_vd and directory and output_data_in:
+        filename = fl_vd.name
         directory = directory.replace('\\','/')
 
         file_path = directory + '/' + filename
@@ -204,8 +204,34 @@ with tab1:
         vd_to_csv_func(file_path,output_data_in)
         #vde_to_csv_func(file_path,output_data_in)
 
-        st.write('Converted !!!')
+        st.write(' Successfully converted !!!')
+        
+    if fl_vde and directory and output_data_in:
+        filename = fl_vde.name
+        directory = directory.replace('\\','/')
 
+        file_path = directory + '/' + filename
+        # st.write(file_path)
+
+        folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
+        function_to_csv  = get_python_files_from_github_folder(folder_url_csv)
+        # ipynb_files = glob.glob(os.path.join(folder_path_csv, '*.ipynb'))
+        # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
+
+        # all_functions = {}
+        # for filename_csv in ipynb_file_names:
+        #     # notebook_path = os.path.join(folder_path_csv, filename_csv)
+        #     # script_path = os.path.join(folder_path_csv, filename_csv.replace(".ipynb", ".py"))
+        #     # convert_notebook_to_script(notebook_path, script_path)
+        #     # function_vd_csv = import_functions_from_script(script_path)
+
+        str_keys = [str(key) for key in function_to_csv.keys()]
+        # vd_to_csv_func =  function_to_csv[str_keys[0]]
+        vde_to_csv_func = function_to_csv[str_keys[1]]
+        # vd_to_csv_func(file_path,output_data_in)
+        vde_to_csv_func(file_path,output_data_in)
+
+        st.write(' Successfully converted !!!')    
 
 with tab2:
     st.markdown('**STEP 1: Set the directory for the input data and figures output**')
