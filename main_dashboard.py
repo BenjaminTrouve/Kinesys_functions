@@ -200,9 +200,9 @@ with tab1:
 
         str_keys = [str(key) for key in function_to_csv.keys()]
         vd_to_csv_func =  function_to_csv[str_keys[0]]
-        vde_to_csv_func = function_to_csv[str_keys[1]]
+        #vde_to_csv_func = function_to_csv[str_keys[1]]
         vd_to_csv_func(file_path,output_data_in)
-        vde_to_csv_func(file_path,output_data_in)
+        #vde_to_csv_func(file_path,output_data_in)
 
         st.write('Converted !!!')
 
