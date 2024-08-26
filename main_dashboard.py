@@ -199,8 +199,10 @@ with tab1:
         #     # function_vd_csv = import_functions_from_script(script_path)
 
         str_keys = [str(key) for key in function_to_csv.keys()]
-        function_to_call =  function_to_csv[str_keys[0]]
-        function_to_call(file_path,output_data_in)
+        vd_to_csv_func =  function_to_csv[str_keys[0]]
+        vde_to_csv_func = function_to_csv[str_keys[1]]
+        vd_to_csv_func(file_path,output_data_in)
+        vde_to_csv_func(file_path,output_data_in)
 
         st.write('Converted !!!')
 
