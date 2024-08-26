@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.patches import Patch
 
-def func_H2_prod_process(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_H2_production_by_process(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     var_Fout = pd.read_csv(file_path_ref + 'VAR_FOut_' + run_name_ref + '.csv', sep = ',')
     H2_prod_ref = var_Fout[(var_Fout['1'] == 'HH2') & (~var_Fout['2'].str.contains('TU_H2'))]
