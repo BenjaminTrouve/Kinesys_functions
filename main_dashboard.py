@@ -149,7 +149,7 @@ with tab1:
     col1, col2, col3 = st.columns([3, 1, 3], vertical_alignment='center')
     
     fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
-    fl_vde = st.file_uploader(":page_facing_up: Choose VD file:", type=['vde'])
+    fl_vde = st.file_uploader(":page_facing_up: Choose VDE file:", type=['vde'])
     with col1:
         st.session_state.inputs['vd_file_path'] = st.text_input(':open_file_folder: Enter the WorkTIMES directory'
                                                                , st.session_state.inputs['vd_file_path'])
