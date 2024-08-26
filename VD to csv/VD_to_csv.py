@@ -57,9 +57,7 @@ def func_convert_vd_to_csv(file_path, output_folder):
         filtered_df = parsed_data[parsed_data[0] == value]
         
         # Export the filtered DataFrame to a separate sheet in the Excel file
-        # filtered_df.to_csv(str(value) + '_'+ filename.replace(".vd", ".csv"), index=False)
-        feather_file_path = os.path.join(new_folder, f"{value}_{filename.replace('.vd', '.csv')}")
-        feather.write_feather(filtered_df, feather_file_path)
+        filtered_df.to_csv(str(value) + '_'+ filename.replace(".vd", ".csv"), index=False)
 
 
 # func_convert_vd_to_csv(r'D:\Veda\Veda\GAMS_WrkTIMES\NZE\NZE~0004' + '/' + 'nze~0004_1406.vd')
