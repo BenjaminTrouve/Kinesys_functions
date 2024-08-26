@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 from matplotlib.patches import Patch
 
-def func_H2_cons_sector(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_H2_consumption_by_sector(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     var_Fin = pd.read_csv(file_path_ref + 'VAR_FIn_' + run_name_ref + '.csv', sep = ',')
     H2_cons_ref = var_Fin[(var_Fin['1'] == 'HH2') & (~var_Fin['2'].str.contains('TU_H2'))]
