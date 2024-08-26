@@ -11,7 +11,7 @@ from matplotlib.patches import Patch
 
 
 
-def func_H2_prod_vs_cons_by_region(file_path_scen, run_name_scen, output_folder):
+def func_H2_production_vs_consumption_by_region(file_path_scen, run_name_scen, output_folder):
     
     var_Fout = pd.read_csv(file_path_scen + 'VAR_FOut_' + run_name_scen + '.csv', sep = ',')
     H2_prod_scen = var_Fout[(var_Fout['1'] == 'HH2') & (~var_Fout['2'].str.contains('TU_H2'))]
