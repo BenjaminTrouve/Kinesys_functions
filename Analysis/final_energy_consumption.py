@@ -38,7 +38,7 @@ def commodity(folder,filename):
     return com_filt
 
 ### function to plot the energy consumption mix 
-def final_nrg_consumption(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder):
+def func_final_nrg_consumption(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder):
 
     ## dictionary to assign each final energy demand to a commodity
     dict_nrg = {'ELC':['ELC','NUC','SPV','WIN','HYD','STH'],
