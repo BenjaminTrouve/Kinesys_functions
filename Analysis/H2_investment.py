@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 from matplotlib.patches import Patch
 
-def func_cost_inv(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_cost_of_investment(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     cost_inv = pd.read_csv(file_path_ref + 'Cost_Inv_' + run_name_ref + '.csv', sep = ',')
     new_inv_ref = cost_inv[(cost_inv['7'].str.contains('INV')) & (cost_inv['2'].str.contains('H2prd'))]
