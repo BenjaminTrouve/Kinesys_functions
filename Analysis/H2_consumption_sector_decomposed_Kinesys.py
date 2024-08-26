@@ -10,7 +10,7 @@ import os
 import numpy as np
 from matplotlib.patches import Patch
 
-def func_H2_cons_sector_decompose(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_H2_consumption_by_sector_decomposed(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     final_cons = ['INDHH2','TRAGH2','TRALH2','ELCHH2','RESHH2'] 
     figure_list = []
