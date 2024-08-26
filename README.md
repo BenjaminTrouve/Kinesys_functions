@@ -1,3 +1,4 @@
 # Kinesys_functions
 
-*[![My Project Logo]](streamlit_python_diagram.pdf)
+![Streamlit python diagram](streamlit_python_diagram.pdf)
+![From KINESYS to figure results diagram](streamlit_python_diagram.pdf)
