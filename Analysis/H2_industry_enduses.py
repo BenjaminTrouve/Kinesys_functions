@@ -10,7 +10,7 @@ import os
 import numpy as np
 from matplotlib.patches import Patch
 
-def func_H2_industry_enduses(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_H2_industry_end_uses(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     var_Fin = pd.read_csv(file_path_ref + 'VAR_FIn_' + run_name_ref + '.csv', sep = ',')
     H2_cons_ref = var_Fin[var_Fin['1'] == 'INDHH2']
