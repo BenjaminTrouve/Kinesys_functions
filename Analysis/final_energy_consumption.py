@@ -175,5 +175,6 @@ def func_final_nrg_consumption(file_path_scen,file_path_ref, run_name_scen,run_n
                             , format ='pdf'
                             ,  bbox_inches='tight')
         return plt
-    plot_stacked_bars_with_differentiation(sorted_df1,sorted_df2,percentages1,percentages2)
+    f= plot_stacked_bars_with_differentiation(sorted_df1,sorted_df2,percentages1,percentages2)
+    return f
 
