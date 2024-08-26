@@ -1,7 +1,7 @@
 # Kinesys_functions
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+
 
 ![Streamlit python diagram](streamlit_python_diagram.pdf)
 
