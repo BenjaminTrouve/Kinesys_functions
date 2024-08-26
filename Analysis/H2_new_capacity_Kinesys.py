@@ -10,7 +10,7 @@ import numpy as np
 from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 
-def func_H2_new_cap(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
+def func_H2_new_capacity_by_region(file_path_scen,file_path_ref, run_name_scen,run_name_ref, output_folder):
 
     cap_new = pd.read_csv(file_path_ref + 'Cap_New_' + run_name_ref + '.csv', sep = ',')
     new_cap_ref = cap_new[(cap_new['7'].str.contains('INSTCAP')) & (cap_new['2'].str.contains('H2prd'))]
