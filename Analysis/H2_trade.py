@@ -14,7 +14,7 @@ from matplotlib.colorbar import ColorbarBase
 from matplotlib.patches import Patch
 
 
-def func_H2_trade(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder):
+def func_H2_net_trade_map(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder):
 
     var_Fout_ref = pd.read_csv(file_path_ref + 'VAR_FOut_' + run_name_ref + '.csv', sep = ',')
     var_Fout_ref = var_Fout_ref[var_Fout_ref['1'] == 'HH2']
