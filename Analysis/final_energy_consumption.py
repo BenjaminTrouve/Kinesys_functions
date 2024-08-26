@@ -13,10 +13,10 @@ from collections import Counter
 import re
 
 ### path to import .vde file to import the commodity sets
-folder1 = 'C:/Users/trouvebe/Desktop/Thesis/Chapter 1/Output/VDE file/nze~0004_1406/'
-filename1 = 'nze~0004_1406'
-folder2 = 'C:/Users/trouvebe/Desktop/Thesis/Chapter 1/Output/VDE file/nze~0004_2805/'
-filename2 = 'nze~0004_2805'
+# folder1 = 'C:/Users/trouvebe/Desktop/Thesis/Chapter 1/Output/VDE file/nze~0004_1406/'
+# filename1 = 'nze~0004_1406'
+# folder2 = 'C:/Users/trouvebe/Desktop/Thesis/Chapter 1/Output/VDE file/nze~0004_2805/'
+# filename2 = 'nze~0004_2805'
 
 ## Function to filter the commodity sets
 def commodity(folder,filename):
@@ -52,7 +52,7 @@ def func_final_energy_consumption(file_path_scen,file_path_ref, run_name_scen,ru
     
     ## Calculate the final energy consumption for each commodity in Mtoe for the reference scenario
     var_Fin_ref = pd.read_csv(file_path_ref + 'VAR_FIn_' + run_name_ref + '.csv', sep = ',')
-    var_Fin_ref = var_Fin_ref[var_Fin_ref['1'].isin(commodity(folder1,filename1))]
+    var_Fin_ref = var_Fin_ref[var_Fin_ref['1'].isin(commodity(file_path_ref,run_name_ref))]
     var_Fin_ref['fuel'] = var_Fin_ref['1'].astype(str).str[-3:]
     reverse_mapping = {item: key for key, values in dict_nrg.items() for item in values}
     var_Fin_ref['fuel_grp'] = var_Fin_ref['fuel'].map(reverse_mapping)
@@ -62,7 +62,7 @@ def func_final_energy_consumption(file_path_scen,file_path_ref, run_name_scen,ru
 
     ## Calculate the final energy consumption for each commodity in Mtoe for the tested scenario
     var_Fin_scen = pd.read_csv(file_path_scen + 'VAR_FIn_' + run_name_scen + '.csv', sep = ',')
-    var_Fin_scen = var_Fin_scen[var_Fin_scen['1'].isin(commodity(folder2,filename2))]
+    var_Fin_scen = var_Fin_scen[var_Fin_scen['1'].isin(commodity(file_path_scen,run_name_scen))]
     var_Fin_scen['fuel'] = var_Fin_scen['1'].astype(str).str[-3:]
     reverse_mapping = {item: key for key, values in dict_nrg.items() for item in values}
     var_Fin_scen['fuel_grp'] = var_Fin_scen['fuel'].map(reverse_mapping)
