@@ -263,9 +263,9 @@ with tab2:
     function_choice_list = inverse_process_string_list(function_choice)
     
     user_inputs = {} 
-    
+    arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
     for func_name in function_choice_list:
-        func, arg_names = all_functions[func_name]
+        func = all_functions[func_name]
         user_inputs[func_name] = {}
         st.write(f"Provide arguments for {func_name}:")
         
