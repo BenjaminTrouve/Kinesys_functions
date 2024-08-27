@@ -259,47 +259,65 @@ with tab2:
 
 
     # st.sidebar.title('Figure selection')
-    function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
+    # function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
+    with st.form(key='multiselect_form'):
+        function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
+        
+        # Create a submit button
+        submit_button = st.form_submit_button(label='Confirm Selection')
+    
+    # Check if the submit button is clicked and if all options are selected
+    if submit_button:
+        if set(function_choice) == set(options):
+            st.success("All options selected! Proceeding with further operations.")
+            # Continue with your further operations here
+        else:
+            st.error("Please select all the options before proceeding.")
+    else:
+        st.warning("Please select all options and confirm.")
+
+
+    
 
     function_choice_list = inverse_process_string_list(function_choice)
-    
-    user_selections = {} 
-    
-    arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
-    
-    for func_name in function_choice_list:
-        func = all_functions[func_name]
-        
-        user_selections[func_name] = {}
-        st.write(f"Select arguments for {func_name}:")
-        
-        for arg_name in arg_names:
-            # Use checkboxes to let the user select which variables to use
-            selected = st.checkbox(f"Use {arg_name}?", key=f"{function_choice}_{arg_name}_checkbox")
-            if selected:
-                selected_variables[arg_name] = st.selectbox(f"Select variable for {arg_name}", options=globals().keys(), key=f"{function_choice}_{arg_name}_selectbox")
-    
-    # Step 3: Run the selected functions with selected variable names
+
     if st.button("Run Selected Functions"):
         for func_name in function_choice_list:
-            func = all_functions[func_name]
+            func =  all_functions[func_name]
+            st.set_option('deprecation.showPyplotGlobalUse', False) 
+            fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
+            st.pyplot(fig)
+            plt.close(fig)
             
-            # Prepare arguments by getting the values of selected variable names
-            args = [globals()[selected_variables[arg_name]] for arg_name in arg_names if arg_name in selected_variables]
+    # user_selections = {} 
     
-            if len(args) == len(arg_names):  # Ensure all required arguments are selected
-                fig = selected_function(*args)
-                st.pyplot(fig)
-                plt.close(fig)
-            else:
-                st.error("Please select all required arguments.")
-    # if st.button("Run Selected Functions"):
-    #     for func_name in function_choice_list:
-    #         func =  all_functions[func_name]
-    #         st.set_option('deprecation.showPyplotGlobalUse', False) 
-    #         fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
-    #         st.pyplot(fig)
-    #         plt.close(fig)
+    # arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
+    
+    # for func_name in function_choice_list:
+    #     func = all_functions[func_name]
+        
+    #     user_selections[func_name] = {}
+    #     st.write(f"Select arguments for {func_name}:")
+        
+    #     for 
+    #     selected = st.checkbox(f"Use {arg_name}?", arg_names)
+    #     if selected:
+    #         # Step 3: Run the selected functions with selected variable names
+    #         if st.button("Run Selected Functions"):
+    #             for func_name in function_choice_list:
+    #                 func = all_functions[func_name]
+                    
+    #                 # Prepare arguments by getting the values of selected variable names
+    #                 args = [globals()[selected_variables[arg_name]] for arg_name in arg_names if arg_name in selected_variables]
+            
+    #                 if len(args) == len(arg_names):  # Ensure all required arguments are selected
+    #                     fig = selected_function(*args)
+    #                     st.pyplot(fig)
+    #                     plt.close(fig)
+    #                 else:
+    #                     st.error("Please select all required arguments.")
+
+
 
 save_inputs(st.session_state.inputs)
 
