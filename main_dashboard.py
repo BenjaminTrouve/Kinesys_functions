@@ -261,7 +261,9 @@ with tab2:
     function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
 
     function_choice_list = inverse_process_string_list(function_choice)
-
+    
+    user_inputs = {} 
+    
     for func_name in function_choice_list:
         func, arg_names = all_functions[func_name]
         user_inputs[func_name] = {}
