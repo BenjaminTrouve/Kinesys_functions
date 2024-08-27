@@ -41,31 +41,6 @@ for key in input_fields.keys():
     if key not in st.session_state.inputs:
         st.session_state.inputs[key] = ""
 
-
-# def convert_notebook_to_script(notebook_path, script_path):
-#     """Convert Jupyter notebook to Python script."""
-#     with open(notebook_path, 'r', encoding='utf-8') as f:
-#         notebook_content = nbformat.read(f, as_version=4)
-#     exporter = PythonExporter()
-#     script, _ = exporter.from_notebook_node(notebook_content)
-#     with open(script_path, 'w', encoding='utf-8') as f:
-#         f.write(script)
-
-# def import_functions_from_script(script_path):
-#     """Import functions starting with 'func_' from a Python script."""
-#     module_name = os.path.splitext(os.path.basename(script_path))[0]
-#     spec = importlib.util.spec_from_file_location(module_name, script_path)
-#     module = importlib.util.module_from_spec(spec)
-#     spec.loader.exec_module(module)
-
-#     functions = {}
-#     for name in dir(module):
-#         if name.startswith("func_"):
-#             func = getattr(module, name)
-#             if callable(func):
-#                 functions[name] = func
-#     return functions
-
 def inverse_process_string_list(input_list):
         processed_list = []
         for input_string in input_list:
@@ -164,20 +139,10 @@ with tab1:
         )
 
     with col3:
-        # storage_input = 'input_storage.json'
-        # if 'folder_path' not in st.session_state:
-        #     st.session_state.folder_path = load_input(storage_input)
 
-        # # Text input for the folder path
-        # output_data_in = st.text_input(":open_file_folder: Enter the folder for CSV files", st.session_state.folder_path)
-
-        # if output_data_in != st.session_state.folder_path:
-        #     st.session_state.folder_path = output_data_in
-        #     save_input(output_data_in,storage_input)
         st.session_state.inputs['folder_path'] = st.text_input(':open_file_folder: Enter the folder for CSV files'
                                                                , st.session_state.inputs['folder_path'])
-        output_data_in = st.session_state.inputs['folder_path']
-        # output_data_in = st.text_input(':open_file_folder: Enter the folder for CSV files')        
+        output_data_in = st.session_state.inputs['folder_path']    
 
     if fl_vd and directory and output_data_in:
         filename = fl_vd.name
@@ -188,15 +153,7 @@ with tab1:
 
         folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
         function_to_csv  = get_python_files_from_github_folder(folder_url_csv)
-        # ipynb_files = glob.glob(os.path.join(folder_path_csv, '*.ipynb'))
-        # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
 
-        # all_functions = {}
-        # for filename_csv in ipynb_file_names:
-        #     # notebook_path = os.path.join(folder_path_csv, filename_csv)
-        #     # script_path = os.path.join(folder_path_csv, filename_csv.replace(".ipynb", ".py"))
-        #     # convert_notebook_to_script(notebook_path, script_path)
-        #     # function_vd_csv = import_functions_from_script(script_path)
 
         str_keys = [str(key) for key in function_to_csv.keys()]
         vd_to_csv_func =  function_to_csv[str_keys[0]]
@@ -215,15 +172,7 @@ with tab1:
 
         folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
         function_to_csv  = get_python_files_from_github_folder(folder_url_csv)
-        # ipynb_files = glob.glob(os.path.join(folder_path_csv, '*.ipynb'))
-        # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
 
-        # all_functions = {}
-        # for filename_csv in ipynb_file_names:
-        #     # notebook_path = os.path.join(folder_path_csv, filename_csv)
-        #     # script_path = os.path.join(folder_path_csv, filename_csv.replace(".ipynb", ".py"))
-        #     # convert_notebook_to_script(notebook_path, script_path)
-        #     # function_vd_csv = import_functions_from_script(script_path)
 
         str_keys = [str(key) for key in function_to_csv.keys()]
         # vd_to_csv_func =  function_to_csv[str_keys[0]]
@@ -237,17 +186,6 @@ with tab2:
     st.markdown('**STEP 1: Set the directory for the input data and figures output**')
     col1, col2, col3 = st.columns([3, 1, 3], vertical_alignment='center')
     with col1:
-        # storage_input = 'input_storage.json'
-        # # Load the stored input when the app starts
-        # if 'folder_path' not in st.session_state:
-        #     st.session_state.folder_path = load_input(storage_input)
-
-        # # Text input for the folder path
-        # input_path = st.text_input(":open_file_folder: Enter the path for in input data", st.session_state.folder_path)
-
-        # if input_path != st.session_state.folder_path:
-        #     st.session_state.folder_path = input_path
-        #     save_input(input_path,storage_input)
         
         st.session_state.inputs['folder_path'] = st.text_input(":open_file_folder: Enter the path for in input data"
                                                                , st.session_state.inputs['folder_path'])
@@ -260,21 +198,10 @@ with tab2:
             unsafe_allow_html=True
         )
     with col3:
-        # storage_output = 'output_storage.json'
-        # # Load the stored input when the app starts
-        # if 'folder_path' not in st.session_state:
-        #     st.session_state.folder_path = load_input(storage_output)
 
-        # # Text input for the folder path
-        # output_path = st.text_input(":open_file_folder: Enter figure output folder", st.session_state.folder_path)
-
-        # if output_path != st.session_state.folder_path:
-        #     st.session_state.folder_path = output_path
-        #     save_input(output_path,storage_output)
         st.session_state.inputs['figure_path'] = st.text_input(":open_file_folder: Enter figure output folder"
                                                                , st.session_state.inputs['figure_path'])
         output_path = st.session_state.inputs['figure_path']
-        # output_path = st.text_input(":open_file_folder: Enter figure output folder")
 
 
     st.markdown('**STEP 2: Choose the reference and the scenario run based on the running date**')
@@ -317,28 +244,6 @@ with tab2:
         run_name_ref, run_name_scen, file_path_ref, file_path_scen, output_folder = scenario_param(date_ref_ddmm,date_scen_ddmm,input_path,output_path)
 
 
-
-    # folder_path = r'C:\Users\trouvebe\Desktop\Thesis\Chapter 1\Python functions\Kinesys post-processing\Analysis'
-    # folder_path = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\Functions'
-    # url = 'https://api.github.com/repos/BenjaminTrouve/Kinesys_functions/contents/Analysis'
-    # # Send the request
-    # response = requests.get(url)
-    # if response.status_code == 200:
-    #     folder_path = response.json()
-    # py_files = [item for item in contents if item['name'].endswith('.py') and item['type'] == 'file']
-
-    # Process all .ipynb files in the folder
-    # ipynb_files = glob.glob(os.path.join(folder_path, '*.ipynb'))
-    # ipynb_file_names = [os.path.basename(file) for file in ipynb_files]
-
-    # all_functions = {}
-    # for filename in ipynb_file_names:
-    #     notebook_path = os.path.join(folder_path, filename)
-    #     script_path = os.path.join(folder_path, filename.replace(".ipynb", ".py"))
-    #     convert_notebook_to_script(notebook_path, script_path)
-    #     functions = import_functions_from_script(script_path)
-    #     all_functions.update(functions)
-
     folder_url = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/Analysis'
     all_functions  = get_python_files_from_github_folder(folder_url)
 
@@ -357,17 +262,30 @@ with tab2:
 
     function_choice_list = inverse_process_string_list(function_choice)
 
+    for func_name in function_choice_list:
+        func, arg_names = all_functions[func_name]
+        user_inputs[func_name] = {}
+        st.write(f"Provide arguments for {func_name}:")
+        
+        for arg_name in arg_names:
+            user_inputs[func_name][arg_name] = st.text_input(f"Enter value for {arg_name}", key=f"{func_name}_{arg_name}")
+    
+    # Step 3: Run the selected functions
     if st.button("Run Selected Functions"):
         for func_name in function_choice_list:
-            func =  all_functions[func_name]
-    # if function_choice:
-    #     func = all_functions[function_choice_list[0]]
-            st.set_option('deprecation.showPyplotGlobalUse', False) 
-            # figure_func = function_choice[0]
-            fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
-            # for f in fig:
+            func, arg_names = all_functions[func_name]
+            args = [float(user_inputs[func_name][arg_name]) for arg_name in arg_names]  # Convert inputs to appropriate types
+            fig = func(*args)
             st.pyplot(fig)
             plt.close(fig)
+
+    # if st.button("Run Selected Functions"):
+    #     for func_name in function_choice_list:
+    #         func =  all_functions[func_name]
+    #         st.set_option('deprecation.showPyplotGlobalUse', False) 
+    #         fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
+    #         st.pyplot(fig)
+    #         plt.close(fig)
 
 save_inputs(st.session_state.inputs)
 
