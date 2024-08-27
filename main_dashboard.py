@@ -277,8 +277,6 @@ with tab2:
         st.warning("Please select all options and confirm.")
 
 
-    
-
     function_choice_list = inverse_process_string_list(function_choice)
 
     if st.button("Run Selected Functions"):
