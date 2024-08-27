@@ -209,7 +209,7 @@ with tab2:
     col4, col5 = st.columns((2))
 
     run_options1 = ['nze~0004','aps~0002']
-    run_options2 = ['nze~0004','aps~0002']
+    run_options2 = ['nze~0004']
     with col4:
         reference_name = st.selectbox('Choose an option:', run_options1)
 
@@ -267,7 +267,6 @@ with tab2:
             result_string = ' '.join(filtered_substrings)
             processed_list.append(result_string)
         return processed_list
-
 
     # st.sidebar.title('Figure selection')
     # function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
