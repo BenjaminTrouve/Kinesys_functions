@@ -274,12 +274,9 @@ with tab2:
         
         for arg_name in arg_names:
             # Use checkboxes to let the user select which variables to use
-            use_arg = st.checkbox(f"Use {arg_name}?", key=f"{func_name}_{arg_name}_checkbox")
-            if use_arg:
-                selected_variable = st.selectbox(f"Select variable for {arg_name}", options=globals().keys(), key=f"{func_name}_{arg_name}_selectbox")
-                user_selections[func_name][arg_name] = selected_variable
-            else:
-                user_selections[func_name][arg_name] = None  # Mark as not used
+            selected = st.checkbox(f"Use {arg_name}?", key=f"{function_choice}_{arg_name}_checkbox")
+            if selected:
+                selected_variables[arg_name] = st.selectbox(f"Select variable for {arg_name}", options=globals().keys(), key=f"{function_choice}_{arg_name}_selectbox")
     
     # Step 3: Run the selected functions with selected variable names
     if st.button("Run Selected Functions"):
@@ -287,19 +284,14 @@ with tab2:
             func = all_functions[func_name]
             
             # Prepare arguments by getting the values of selected variable names
-            args = []
-            for arg_name in arg_names:
-                selected_variable = user_selections[func_name][arg_name]
-                if selected_variable:
-                    args.append(globals()[selected_variable])  # Get the value of the variable by its name
-                else:
-                    args.append(None)  # If not used, append None or handle differently
-            
-            # Call the function with the prepared arguments
-            fig = func(*args)
-            st.pyplot(fig)
-            plt.close(fig)
-
+            args = [globals()[selected_variables[arg_name]] for arg_name in arg_names if arg_name in selected_variables]
+    
+            if len(args) == len(arg_names):  # Ensure all required arguments are selected
+                fig = selected_function(*args)
+                st.pyplot(fig)
+                plt.close(fig)
+            else:
+                st.error("Please select all required arguments.")
     # if st.button("Run Selected Functions"):
     #     for func_name in function_choice_list:
     #         func =  all_functions[func_name]
