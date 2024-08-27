@@ -274,7 +274,7 @@ with tab2:
         for arg_name in arg_names:
             use_arg = st.checkbox(f"Use {arg_name}?", key=f"{func_name}_{arg_name}_checkbox")
             if use_arg:
-                user_inputs[func_name][arg_name] = st.number_input(f"Enter value for {arg_name}", key=f"{func_name}_{arg_name}")
+                user_inputs[func_name][arg_name] = use_arg
             else:
                 user_inputs[func_name][arg_name] = None  # Mark as not used
     
