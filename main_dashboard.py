@@ -268,6 +268,7 @@ with tab2:
     
     for func_name in function_choice_list:
         func = all_functions[func_name]
+        
         user_selections[func_name] = {}
         st.write(f"Select arguments for {func_name}:")
         
