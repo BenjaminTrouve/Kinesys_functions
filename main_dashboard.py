@@ -275,7 +275,7 @@ with tab2:
     # Step 3: Run the selected functions
     if st.button("Run Selected Functions"):
         for func_name in function_choice_list:
-            func, arg_names = all_functions[func_name]
+            func = all_functions[func_name]
             args = [float(user_inputs[func_name][arg_name]) for arg_name in arg_names]  # Convert inputs to appropriate types
             fig = func(*args)
             st.pyplot(fig)
