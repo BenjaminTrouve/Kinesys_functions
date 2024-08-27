@@ -262,7 +262,7 @@ with tab2:
 
     function_choice_list = inverse_process_string_list(function_choice)
     
-    user_inputs = {} 
+    user_selections = {} 
     
     arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
     
