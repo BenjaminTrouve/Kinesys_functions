@@ -268,24 +268,21 @@ with tab2:
     
     # Check if the submit button is clicked and if all options are selected
     if submit_button:
-        if set(function_choice) == set(process_string_list(all_functions.keys())):
-            st.success("All options selected! Proceeding with further operations.")
-            # Continue with your further operations here
-        else:
-            st.error("Please select all the options before proceeding.")
+        function_choice_list = inverse_process_string_list(function_choice)
+
+        if st.button("Run Selected Functions"):
+            for func_name in function_choice_list:
+                func =  all_functions[func_name]
+                st.set_option('deprecation.showPyplotGlobalUse', False) 
+                fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
+                st.pyplot(fig)
+                plt.close(fig)
+                
     else:
-        st.warning("Please select all options and confirm.")
+        st.error("Please select the options before proceeding.")
 
 
-    function_choice_list = inverse_process_string_list(function_choice)
-
-    if st.button("Run Selected Functions"):
-        for func_name in function_choice_list:
-            func =  all_functions[func_name]
-            st.set_option('deprecation.showPyplotGlobalUse', False) 
-            fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
-            st.pyplot(fig)
-            plt.close(fig)
+    
             
     # user_selections = {} 
     
