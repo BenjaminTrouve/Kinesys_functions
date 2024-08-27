@@ -272,11 +272,11 @@ with tab2:
         st.write(f"Select arguments for {func_name}:")
         
         for arg_name in arg_names:
-            use_arg = st.checkbox(f"Use {arg_name}?", key=f"{func_name}_{arg_name}_checkbox")
-            if use_arg:
-                user_inputs[func_name][arg_name] = use_arg
-            else:
-                user_inputs[func_name][arg_name] = None  # Mark as not used
+            user_inputs[func_name][arg_name] = st.checkbox(f"Use {arg_name}?", key=f"{func_name}_{arg_name}_checkbox")
+            # if use_arg:
+            #     user_inputs[func_name][arg_name] = use_arg
+            # else:
+            #     user_inputs[func_name][arg_name] = None  # Mark as not used
     
     # Step 3: Run the selected functions
     if st.button("Run Selected Functions"):
