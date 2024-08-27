@@ -263,20 +263,35 @@ with tab2:
     function_choice_list = inverse_process_string_list(function_choice)
     
     user_inputs = {} 
+    
     arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
+    
     for func_name in function_choice_list:
         func = all_functions[func_name]
         user_inputs[func_name] = {}
-        st.write(f"Provide arguments for {func_name}:")
+        st.write(f"Select arguments for {func_name}:")
         
         for arg_name in arg_names:
-            user_inputs[func_name][arg_name] = st.text_input(f"Enter value for {arg_name}", key=f"{func_name}_{arg_name}")
+            use_arg = st.checkbox(f"Use {arg_name}?", key=f"{func_name}_{arg_name}_checkbox")
+            if use_arg:
+                user_inputs[func_name][arg_name] = st.number_input(f"Enter value for {arg_name}", key=f"{func_name}_{arg_name}")
+            else:
+                user_inputs[func_name][arg_name] = None  # Mark as not used
     
     # Step 3: Run the selected functions
     if st.button("Run Selected Functions"):
         for func_name in function_choice_list:
             func = all_functions[func_name]
-            args = [float(user_inputs[func_name][arg_name]) for arg_name in arg_names]  # Convert inputs to appropriate types
+            
+            # Prepare arguments based on selected checkboxes
+            args = []
+            for arg_name in arg_names:
+                if user_inputs[func_name][arg_name] is not None:
+                    args.append(user_inputs[func_name][arg_name])
+                else:
+                    args.append(None)  # If not used, append None or default
+            
+            # Call the function with the prepared arguments
             fig = func(*args)
             st.pyplot(fig)
             plt.close(fig)
