@@ -204,9 +204,19 @@ with tab2:
                                                                , st.session_state.inputs['figure_path'])
         output_path = st.session_state.inputs['figure_path']
 
-
-    st.markdown('**STEP 2: Choose the reference and the scenario run based on the running date**')
+    st.markdown('**STEP 2: Choose your scenario name**')
     col4, col5 = st.columns((2))
+
+    run_options = ['nze~0004','aps~0002']
+    
+    with col4:
+        reference_name = st.selectbox('Choose an option:', run_options)
+
+    with col5:
+        scenario_name = st.selectbox('Choose an option:', run_options)
+        
+    st.markdown('**STEP 3: Choose the reference and the scenario run based on the running date**')
+    col6, col7 = st.columns((2))
     start_date = '2024-05-28'
     end_date = '2024-06-14'
     date_series = pd.date_range(start=start_date, end=end_date,freq='D')
@@ -214,20 +224,20 @@ with tab2:
     ref_date = date_series.min()
     scen_date = date_series.max()
 
-    with col4:
+    with col6:
         date_ref = pd.to_datetime(st.date_input(':date: Reference date', ref_date))
         date_ref_ddmm = date_ref.strftime('%d%m')
 
-    with col5:
+    with col7:
         date_scen = pd.to_datetime(st.date_input(':date: Scenario date', scen_date))
         date_scen_ddmm = date_scen.strftime('%d%m')
 
-    st.markdown('**STEP 3: Choose figure to display!**')
+    st.markdown('**STEP 4: Choose figure to display!**')
 
-    def scenario_param(date_ref, date_scen,input_path,output_path):
+    def scenario_param(name_ref,name_scen, date_ref, date_scen,input_path,output_path):
         date_list = [date_ref, date_scen]
-        run_name_ref = f'nze~0004_{date_list[0]}'
-        run_name_scen = f'nze~0004_{date_list[1]}'
+        run_name_ref = f'{name_ref}_{date_list[0]}'
+        run_name_scen = f'{name_scen}_{date_list[1]}'
         folder_path = input_path.replace('\\','/')
         # file_path_ref = os.path.join(folder_path,run_name_ref) 
         file_path_ref = folder_path + '/' + run_name_ref + '/'
@@ -241,8 +251,8 @@ with tab2:
         os.makedirs(output_folder, exist_ok=True)
         return run_name_ref, run_name_scen, file_path_ref, file_path_scen, output_folder
 
-    if input_path and output_path and date_ref_ddmm and date_scen_ddmm:
-        run_name_ref, run_name_scen, file_path_ref, file_path_scen, output_folder = scenario_param(date_ref_ddmm,date_scen_ddmm,input_path,output_path)
+    if input_path and output_path and date_ref_ddmm and date_scen_ddmm and reference_name and scenario_name:
+        run_name_ref, run_name_scen, file_path_ref, file_path_scen, output_folder = scenario_param(reference_name, scenario_name, date_ref_ddmm,date_scen_ddmm,input_path,output_path)
 
 
     folder_url = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/Analysis'
