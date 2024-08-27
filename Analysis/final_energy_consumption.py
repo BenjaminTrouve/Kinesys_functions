@@ -174,7 +174,7 @@ def func_final_energy_consumption(file_path_scen,file_path_ref, run_name_scen,ru
         plt.savefig(output_folder + f'final_energy_consumption.pdf'
                             , format ='pdf'
                             ,  bbox_inches='tight')
-        return plt
-    f= plot_stacked_bars_with_differentiation(sorted_df1,sorted_df2,percentages1,percentages2)
+        return fig
+    f = plot_stacked_bars_with_differentiation(sorted_df1,sorted_df2,percentages1,percentages2)
     return f
 
