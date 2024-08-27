@@ -283,7 +283,7 @@ with tab2:
         if st.button("Run Selected Functions"):
             for func_name in function_choice_list:
                 func =  all_functions[func_name]
-                st.set_option('deprecation.showPyplotGlobalUse', False) 
+                # st.set_option('deprecation.showPyplotGlobalUse', False) 
                 st.write([file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder])
                 fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
                 st.pyplot(fig)
