@@ -207,13 +207,13 @@ with tab2:
     st.markdown('**STEP 2: Choose your scenario name**')
     col4, col5 = st.columns((2))
 
-    run_options = ['nze~0004','aps~0002']
-    
+    run_options1 = ['nze~0004','aps~0002']
+    run_options2 = ['nze~0004','aps~0002']
     with col4:
-        reference_name = st.selectbox('Choose an option:', run_options)
+        reference_name = st.selectbox('Choose an option:', run_options1)
 
     with col5:
-        scenario_name = st.selectbox('Choose an option:', run_options)
+        scenario_name = st.selectbox('Choose an option:', run_options2)
         
     st.markdown('**STEP 3: Choose the reference and the scenario run based on the running date**')
     col6, col7 = st.columns((2))
