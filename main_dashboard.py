@@ -268,7 +268,7 @@ with tab2:
     
     # Check if the submit button is clicked and if all options are selected
     if submit_button:
-        if set(function_choice) == set(options):
+        if set(function_choice) == set(process_string_list(all_functions.keys())):
             st.success("All options selected! Proceeding with further operations.")
             # Continue with your further operations here
         else:
