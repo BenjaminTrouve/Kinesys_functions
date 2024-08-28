@@ -300,36 +300,37 @@ with tab2:
     # Check if the submit button is clicked and if all options are selected
     if submit_button:
         function_choice_list = inverse_process_string_list(function_choice)
-        user_inputs = {}  # Dictionary to hold the user's inputs for each function's arguments
+        
+        # user_inputs = {}  # Dictionary to hold the user's inputs for each function's arguments
 
-        for func_name in function_choice_list:
-            func = all_functions[func_name]
-            func_args = get_function_args(func)
+        # for func_name in function_choice_list:
+        #     func = all_functions[func_name]
+        #     func_args = get_function_args(func)
     
-            # Display the function name as a header
-            st.write(f"**Parameters for {func_name}:**")
+        #     # Display the function name as a header
+        #     st.write(f"**Parameters for {func_name}:**")
     
-            # Collect input for each argument
-            func_input = {}
-            for arg_name, arg_param in func_args.items():
-                default_value = arg_param.default if arg_param.default != inspect.Parameter.empty else None
-                func_input[arg_name] = st.checkbox(f"{arg_name}", value=default_value)
-            user_inputs[func_name] = func_input
+        #     # Collect input for each argument
+        #     func_input = {}
+        #     for arg_name, arg_param in func_args.items():
+        #         default_value = arg_param.default if arg_param.default != inspect.Parameter.empty else None
+        #         func_input[arg_name] = st.checkbox(f"{arg_name}", value=default_value)
+        #     user_inputs[func_name] = func_input
             
-        for func_name in function_choice_list:
-            func = all_functions[func_name]
-            inputs = user_inputs[func_name]
-            fig = func(**inputs)  # Pass the inputs as keyword arguments
-            st.pyplot(fig, use_container_width=True)
-            plt.close(fig)
+        # for func_name in function_choice_list:
+        #     func = all_functions[func_name]
+        #     inputs = user_inputs[func_name]
+        #     fig = func(**inputs)  # Pass the inputs as keyword arguments
+        #     st.pyplot(fig, use_container_width=True)
+        #     plt.close(fig)
 
         
-        # for func_name in function_choice_list:
-        #     func =  all_functions[func_name]
-        #     # st.set_option('deprecation.showPyplotGlobalUse', False) 
-        #     fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
-        #     st.pyplot(fig,use_container_width=True)
-        #     plt.close(fig)
+        for func_name in function_choice_list:
+            func =  all_functions[func_name]
+            # st.set_option('deprecation.showPyplotGlobalUse', False) 
+            fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
+            st.pyplot(fig,use_container_width=True)
+            plt.close(fig)
 
 
 save_inputs(st.session_state.inputs)
