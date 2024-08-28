@@ -113,7 +113,7 @@ st.set_page_config(page_title='KINESYS dashboard', page_icon=':bar_chart:',layou
 
 st.title(':bar_chart: KINESYS Results')
 
-tab0, tab1, tab2 = st.tabs(["**Guidelines**","**VD to CSV**", "**Figures display**"])
+tab0, tab1, tab2 = st.tabs(["**Guidelines**","**VD to CSV**", "**Figure display**"])
 
 # sidebar_placeholder = st.sidebar.empty()
 
