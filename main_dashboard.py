@@ -149,7 +149,8 @@ with tab1:
     
     with col4:
         scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
-        scenario = scenario_name_vd.split('~')[0].upper()
+        scenario = scenario_name_vd.split('~')
+        scenario =  scenario[0].upper()
         
 
     fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
