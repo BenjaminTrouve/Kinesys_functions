@@ -144,7 +144,18 @@ with tab1:
 
         st.session_state.inputs['folder_path'] = st.text_input(':open_file_folder: Enter the folder for CSV files'
                                                                , st.session_state.inputs['folder_path'])
-        output_data_in = st.session_state.inputs['folder_path']    
+        output_data_in = st.session_state.inputs['folder_path'] 
+
+    col4, col5 = st.columns((2))
+    run_options1 = ['nze~0004','aps~0002']
+    run_options2 = ['nze~0004','aps~0002']
+    
+    with col4:
+        reference_name = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
+
+    with col5:
+        scenario_name = st.selectbox('Choose an option:',key='scenario name vd', options = run_options2)
+        
 
     if fl_vd and directory and output_data_in:
         filename = fl_vd.name
