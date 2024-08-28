@@ -144,23 +144,20 @@ with tab1:
                                                                , st.session_state.inputs['folder_path'])
         output_data_in = st.session_state.inputs['folder_path'] 
 
-    col4, col5 = st.columns((2))
+    col4 = st.columns((1))
     run_options1 = ['nze~0004','aps~0002']
-    run_options2 = ['nze~0004','aps~0002']
     
     with col4:
-        reference_name = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
-
-    with col5:
-        scenario_name = st.selectbox('Choose an option:',key='scenario name vd', options = run_options2)
+        scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
+        scenario = scenario_name_vd.split('~')[0].upper()
         
 
     fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
     fl_vde = st.file_uploader(":page_facing_up: Choose VDE file:", type=['vde'])
     
-    if fl_vd and directory and output_data_in:
+    if fl_vd and directory and output_data_in and scenario_name_vd:
         filename = fl_vd.name
-        directory = directory.replace('\\','/')
+        directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
 
         file_path = directory + '/' + filename
         # st.write(file_path)
@@ -177,9 +174,9 @@ with tab1:
 
         st.write(' Successfully converted !!!')
         
-    if fl_vde and directory and output_data_in:
+    if fl_vde and directory and output_data_in and scenario_name_vd:
         filename = fl_vde.name
-        directory = directory.replace('\\','/')
+        directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
 
         file_path = directory + '/' + filename
         # st.write(file_path)
