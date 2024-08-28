@@ -148,7 +148,7 @@ with tab1:
     run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
     
     # with col4:
-    scenario_name_vd = st.selectbox('Choose scenario name:', key='reference name vd', options=  run_options1)
+    scenario_name_vd = st.selectbox(':lower_left_fountain_pen:Choose scenario name:', key='reference name vd', options=  run_options1)
     if '~' in scenario_name_vd:
         scenario = scenario_name_vd.split('~')
         scenario =  scenario[0].upper()
@@ -227,10 +227,10 @@ with tab2:
     run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
     run_options2 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
     with col4:
-        reference_name = st.selectbox('Choose reference scenario name:', key='reference name', options=  run_options1)
+        reference_name = st.selectbox(':lower_left_fountain_pen:Choose reference scenario name:', key='reference name', options=  run_options1)
 
     with col5:
-        scenario_name = st.selectbox('Choose scenario name:',key='scenario name', options = run_options2)
+        scenario_name = st.selectbox(':lower_left_fountain_pen:Choose scenario name:',key='scenario name', options = run_options2)
         
     st.markdown('**STEP 3: Choose the reference and the scenario run based on the running date**')
     col6, col7 = st.columns((2))
