@@ -317,11 +317,11 @@ with tab2:
             user_inputs[func_name] = func_input
             
         for func_name in function_choice_list:
-        func = all_functions[func_name]
-        inputs = user_inputs[func_name]
-        fig = func(**inputs)  # Pass the inputs as keyword arguments
-        st.pyplot(fig, use_container_width=True)
-        plt.close(fig)
+            func = all_functions[func_name]
+            inputs = user_inputs[func_name]
+            fig = func(**inputs)  # Pass the inputs as keyword arguments
+            st.pyplot(fig, use_container_width=True)
+            plt.close(fig)
 
         
         # for func_name in function_choice_list:
