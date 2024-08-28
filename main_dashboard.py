@@ -283,7 +283,7 @@ with tab2:
             func =  all_functions[func_name]
             st.set_option('deprecation.showPyplotGlobalUse', False) 
             fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
-            st.pyplot(fig)
+            st.pyplot(fig,use_container_width=True)
             plt.close(fig)
 
        
