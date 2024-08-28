@@ -145,7 +145,7 @@ with tab1:
         output_data_in = st.session_state.inputs['folder_path'] 
 
     # col4 = st.columns((1))
-    run_options1 = ['nze~0004','aps~0002']
+    run_options1 = ['nze~0004','aps~0002','KSRef_Tot_2']
     
     # with col4:
     scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
