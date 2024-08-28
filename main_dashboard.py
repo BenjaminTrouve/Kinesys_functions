@@ -302,41 +302,6 @@ with tab2:
             st.pyplot(fig,use_container_width=True)
             plt.close(fig)
 
-       
-                
-
-
-    
-            
-    # user_selections = {} 
-    
-    # arg_names = [file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder]
-    
-    # for func_name in function_choice_list:
-    #     func = all_functions[func_name]
-        
-    #     user_selections[func_name] = {}
-    #     st.write(f"Select arguments for {func_name}:")
-        
-    #     for 
-    #     selected = st.checkbox(f"Use {arg_name}?", arg_names)
-    #     if selected:
-    #         # Step 3: Run the selected functions with selected variable names
-    #         if st.button("Run Selected Functions"):
-    #             for func_name in function_choice_list:
-    #                 func = all_functions[func_name]
-                    
-    #                 # Prepare arguments by getting the values of selected variable names
-    #                 args = [globals()[selected_variables[arg_name]] for arg_name in arg_names if arg_name in selected_variables]
-            
-    #                 if len(args) == len(arg_names):  # Ensure all required arguments are selected
-    #                     fig = selected_function(*args)
-    #                     st.pyplot(fig)
-    #                     plt.close(fig)
-    #                 else:
-    #                     st.error("Please select all required arguments.")
-
-
 
 save_inputs(st.session_state.inputs)
 
