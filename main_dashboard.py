@@ -279,15 +279,15 @@ with tab2:
     # Check if the submit button is clicked and if all options are selected
     if submit_button:
         function_choice_list = inverse_process_string_list(function_choice)
-
-    if st.button("Run Selected Functions"):
-        for func_name in function_choice_list:
+         for func_name in function_choice_list:
             func =  all_functions[func_name]
             st.set_option('deprecation.showPyplotGlobalUse', False) 
             st.write([file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder])
             fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
             st.pyplot(fig)
             plt.close(fig)
+
+       
                 
 
 
