@@ -161,10 +161,10 @@ with tab1:
     if fl_vd and directory and output_data_in and scenario_name_vd:
         filename = fl_vd.name
         if scenario:
-            directory = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
+            directory_vd = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
         else:
-            directory = directory.replace('\\','/') + '/' + scenario_name_vd
-        file_path = directory + '/' + filename
+            directory_vd = directory.replace('\\','/') + '/' + scenario_name_vd
+        file_path = directory_vd + '/' + filename
         # st.write(file_path)
 
         folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
@@ -182,10 +182,10 @@ with tab1:
     if fl_vde and directory and output_data_in and scenario_name_vd:
         filename = fl_vde.name
         if scenario:
-            directory = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
+            directory_vde = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
         else:
-            directory = directory.replace('\\','/') + '/' + scenario_name_vd
-        file_path = directory + '/' + filename
+            directory_vde = directory.replace('\\','/') + '/' + scenario_name_vd
+        file_path = directory_vde + '/' + filename
         # st.write(file_path)
 
         folder_url_csv = 'https://github.com/BenjaminTrouve/Kinesys_functions/tree/main/VD%20to%20csv'
