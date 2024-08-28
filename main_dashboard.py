@@ -149,7 +149,7 @@ with tab1:
     
     # with col4:
     scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
-    if scenario_name_vd.contains('~'):
+    if '~' in scenario_name_vd:
         scenario = scenario_name_vd.split('~')
         scenario =  scenario[0].upper()
     else:
