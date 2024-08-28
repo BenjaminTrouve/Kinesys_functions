@@ -13,7 +13,7 @@ import json
 
 warnings.filterwarnings('ignore')
 
-storage_file = 'C:/Users/trouvebe/Desktop/Test streamlit/input storage/input_storage.json'
+storage_file = 'C:/Users/trouvebe/Desktop/Test streamlit 2/input storage/input_storage.json'
 
 # Function to load inputs from the storage file
 def load_inputs():
