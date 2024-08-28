@@ -161,9 +161,9 @@ with tab1:
     if fl_vd and directory and output_data_in and scenario_name_vd:
         filename = fl_vd.name
         if scenario:
-            directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
+            directory = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
         else:
-            directory = directory.replace('\\','/') + scenario_name_vd
+            directory = directory.replace('\\','/') + '/' + scenario_name_vd
         file_path = directory + '/' + filename
         # st.write(file_path)
 
@@ -182,9 +182,9 @@ with tab1:
     if fl_vde and directory and output_data_in and scenario_name_vd:
         filename = fl_vde.name
         if scenario:
-            directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
+            directory = directory.replace('\\','/') + '/' + scenario + '/' + scenario_name_vd
         else:
-            directory = directory.replace('\\','/') + scenario_name_vd
+            directory = directory.replace('\\','/') + '/' + scenario_name_vd
         file_path = directory + '/' + filename
         # st.write(file_path)
 
