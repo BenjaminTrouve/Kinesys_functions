@@ -289,7 +289,7 @@ with tab2:
     # st.sidebar.title('Figure selection')
     # function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
     with st.form(key='multiselect_form'):
-        function_choice = st.multiselect('Choose your figures:', process_string_list(all_functions.keys()))
+        function_choice = st.multiselect(':chart_with_upwards_trend: Choose your figures:', process_string_list(all_functions.keys()))
         
         # Create a submit button
         submit_button = st.form_submit_button(label='Confirm Selection')
