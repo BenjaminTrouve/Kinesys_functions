@@ -144,14 +144,14 @@ with tab1:
                                                                , st.session_state.inputs['folder_path'])
         output_data_in = st.session_state.inputs['folder_path'] 
 
-    col4 = st.columns((1))
+    # col4 = st.columns((1))
     run_options1 = ['nze~0004','aps~0002']
     
-    with col4:
-        scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
-        scenario = scenario_name_vd.split('~')
-        scenario =  scenario[0].upper()
-        
+    # with col4:
+    scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
+    scenario = scenario_name_vd.split('~')
+    scenario =  scenario[0].upper()
+    
 
     fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
     fl_vde = st.file_uploader(":page_facing_up: Choose VDE file:", type=['vde'])
