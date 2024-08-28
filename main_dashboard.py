@@ -219,7 +219,7 @@ with tab2:
     col4, col5 = st.columns((2))
 
     run_options1 = ['nze~0004','aps~0002']
-    run_options2 = ['nze~0004']
+    run_options2 = ['nze~0004','aps~0002']
     with col4:
         reference_name = st.selectbox('Choose an option:', key='reference name', options=  run_options1)
 
