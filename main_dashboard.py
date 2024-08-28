@@ -292,7 +292,7 @@ with tab2:
         function_choice_list = inverse_process_string_list(function_choice)
         for func_name in function_choice_list:
             func =  all_functions[func_name]
-            st.set_option('deprecation.showPyplotGlobalUse', False) 
+            # st.set_option('deprecation.showPyplotGlobalUse', False) 
             fig = func(file_path_scen,file_path_ref, run_name_scen,run_name_ref,output_folder)
             st.pyplot(fig,use_container_width=True)
             plt.close(fig)
