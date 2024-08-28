@@ -115,12 +115,9 @@ st.title(':bar_chart: KINESYS Results')
 
 tab0, tab1, tab2 = st.tabs(["**Guidelines**","**VD to CSV**", "**Figure display**"])
 
-# sidebar_placeholder = st.sidebar.empty()
-
-
-# st.markdown('<style>div.block-container{padding-top:1rem;}<style>',unsafe_allow_html=True)
-
-# folder_path_csv = r'G:\Departement_ R141\Modelisation TIMES\KINESYS output\VD to csv'
+with tab0:
+    st.write('**Function template**')
+    
 with tab1:
     
     col1, col2, col3 = st.columns([3, 1, 3], vertical_alignment='center')
