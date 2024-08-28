@@ -149,17 +149,21 @@ with tab1:
     
     # with col4:
     scenario_name_vd = st.selectbox('Choose an option:', key='reference name vd', options=  run_options1)
-    scenario = scenario_name_vd.split('~')
-    scenario =  scenario[0].upper()
-    
+    if scenario_name_vd.contains('~'):
+        scenario = scenario_name_vd.split('~')
+        scenario =  scenario[0].upper()
+    else:
+        scenario = None
 
     fl_vd = st.file_uploader(":page_facing_up: Choose VD file:", type=['vd'])
     fl_vde = st.file_uploader(":page_facing_up: Choose VDE file:", type=['vde'])
     
     if fl_vd and directory and output_data_in and scenario_name_vd:
         filename = fl_vd.name
-        directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
-
+        if scenario:
+            directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
+        else:
+            directory = directory.replace('\\','/') + scenario_name_vd
         file_path = directory + '/' + filename
         # st.write(file_path)
 
@@ -177,8 +181,10 @@ with tab1:
         
     if fl_vde and directory and output_data_in and scenario_name_vd:
         filename = fl_vde.name
-        directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
-
+        if scenario:
+            directory = directory.replace('\\','/') + scenario + '/' + scenario_name_vd
+        else:
+            directory = directory.replace('\\','/') + scenario_name_vd
         file_path = directory + '/' + filename
         # st.write(file_path)
 
