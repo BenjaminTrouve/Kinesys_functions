@@ -142,7 +142,7 @@ with tab1:
         output_data_in = st.session_state.inputs['folder_path'] 
 
     # col4 = st.columns((1))
-    run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
+    run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2','NZE_H2prod_cost~0004']
     
     # with col4:
     scenario_name_vd = st.selectbox(':lower_left_fountain_pen: Choose scenario name:', key='reference name vd', options=  run_options1)
@@ -221,8 +221,8 @@ with tab2:
     st.markdown('**STEP 2: Choose your scenario name**')
     col4, col5 = st.columns((2))
 
-    run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
-    run_options2 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2']
+    run_options1 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2','NZE_H2prod_cost~0004']
+    run_options2 = ['nze~0004','aps~0003','steps~0002','KSRef_Tot_2','NZE_H2prod_cost~0004']
     with col4:
         reference_name = st.selectbox(':lower_left_fountain_pen: Choose reference scenario name:', key='reference name', options=  run_options1)
 
